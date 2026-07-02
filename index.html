@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天然酵母ベーカリー 麦香(むぎか)|自家製酵母と国産小麦のパン屋</title>
+<meta name="description" content="天然酵母ベーカリー麦香は、自家培養のレーズン酵母と国産小麦で焼き上げる小さなパン屋です。パン一覧、焼き上がり時間表、素材へのこだわりをご紹介します。">
+<style>
+:root{
+  --kinari:#f7f1e3;
+  --kinari-deep:#efe5cf;
+  --kinari-card:#fbf7ec;
+  --brown:#4a3423;
+  --brown-soft:#6e523a;
+  --toast:#a4632c;
+  --wheat:#c99a4b;
+  --wheat-light:#e3c98f;
+  --rust:#b2542c;
+  --leaf:#7a7d4a;
+  --line:rgba(74,52,35,.16);
+  --serif:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{
+  font-family:var(--sans);
+  color:var(--brown);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(201,154,75,.10), transparent 42%),
+    radial-gradient(circle at 88% 90%, rgba(178,84,44,.07), transparent 45%),
+    var(--kinari);
+  line-height:1.9;
+  letter-spacing:.03em;
+  overflow-x:hidden;
+}
+::selection{background:var(--wheat);color:#fff}
+
+/* ===== 紙のような質感(ノイズ) ===== */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+main,header,footer{position:relative;z-index:1}
+
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.5}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+/* ===== ヘッダー ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(247,241,227,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s;
+}
+header.scrolled{box-shadow:0 4px 24px rgba(74,52,35,.10)}
+.header-inner{
+  max-width:1060px;margin:0 auto;padding:0 22px;
+  display:flex;align-items:center;justify-content:space-between;height:64px;
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--brown)}
+.logo svg{width:34px;height:34px}
+.logo-text{font-family:var(--serif)}
+.logo-text b{font-size:1.3rem;letter-spacing:.14em;display:block;line-height:1.2}
+.logo-text span{font-size:.62rem;letter-spacing:.22em;color:var(--brown-soft)}
+nav ul{display:flex;gap:28px;list-style:none}
+nav a{
+  text-decoration:none;color:var(--brown);font-size:.86rem;letter-spacing:.12em;
+  position:relative;padding:6px 0;
+}
+nav a::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--toast);transform:scaleX(0);transform-origin:right;transition:transform .35s;
+}
+nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.menu-btn{
+  display:none;background:none;border:none;cursor:pointer;padding:10px;
+}
+.menu-btn span{
+  display:block;width:24px;height:2px;background:var(--brown);margin:5px 0;
+  transition:transform .3s,opacity .3s;border-radius:2px;
+}
+.menu-open .menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-open .menu-btn span:nth-child(2){opacity:0}
+.menu-open .menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===== ヒーロー ===== */
+.hero{
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;align-items:center;
+  padding:120px 0 80px;
+  position:relative;
+}
+.hero-inner{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+  width:100%;
+}
+.hero-copy .eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.78rem;letter-spacing:.26em;color:var(--toast);
+  margin-bottom:22px;
+}
+.hero-copy .eyebrow::before{content:"";width:36px;height:1px;background:var(--toast)}
+.hero h1{
+  font-size:clamp(2.1rem,5.2vw,3.4rem);
+  letter-spacing:.1em;
+  margin-bottom:26px;
+}
+.hero h1 .accent{color:var(--rust)}
+.hero p.lead{
+  font-size:.95rem;color:var(--brown-soft);max-width:34em;margin-bottom:36px;
+}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 30px;border-radius:999px;text-decoration:none;
+  font-size:.88rem;letter-spacing:.12em;transition:transform .25s,box-shadow .25s,background .25s;
+}
+.btn-primary{
+  background:var(--brown);color:var(--kinari);
+  box-shadow:0 8px 22px rgba(74,52,35,.28);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(74,52,35,.32);background:#5c4130}
+.btn-ghost{
+  border:1px solid var(--brown);color:var(--brown);background:transparent;
+}
+.btn-ghost:hover{background:rgba(74,52,35,.06);transform:translateY(-3px)}
+
+/* ヒーローのパンイラスト */
+.hero-art{position:relative;display:flex;justify-content:center}
+.hero-art svg{width:min(100%,420px);height:auto;overflow:visible}
+.steam{opacity:.55}
+.steam path{
+  stroke:var(--brown-soft);stroke-width:3;fill:none;stroke-linecap:round;
+  stroke-dasharray:60 200;
+  animation:steamFlow 4.2s linear infinite;
+}
+.steam path:nth-child(2){animation-delay:1.4s}
+.steam path:nth-child(3){animation-delay:2.8s}
+@keyframes steamFlow{
+  0%{stroke-dashoffset:260;opacity:0}
+  25%{opacity:.7}
+  75%{opacity:.4}
+  100%{stroke-dashoffset:0;opacity:0}
+}
+.bread-float{animation:breadFloat 6s ease-in-out infinite}
+@keyframes breadFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+.hero-badge{
+  position:absolute;top:4%;right:6%;
+  width:108px;height:108px;border-radius:50%;
+  background:var(--rust);color:var(--kinari);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:.74rem;letter-spacing:.1em;line-height:1.6;
+  box-shadow:0 10px 24px rgba(178,84,44,.35);
+  animation:badgeSpinIn 1s .6s both cubic-bezier(.2,1.4,.4,1);
+}
+.hero-badge b{font-size:1.05rem}
+@keyframes badgeSpinIn{
+  from{transform:scale(0) rotate(-30deg);opacity:0}
+  to{transform:scale(1) rotate(-8deg);opacity:1}
+}
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-size:.68rem;letter-spacing:.3em;color:var(--brown-soft);
+  writing-mode:vertical-rl;height:78px;
+}
+.scroll-hint::after{
+  content:"";position:absolute;left:50%;bottom:-6px;width:1px;height:34px;
+  background:var(--brown-soft);transform-origin:top;
+  animation:hintDrop 1.8s ease-in-out infinite;
+}
+@keyframes hintDrop{
+  0%{transform:scaleY(0);opacity:1}
+  70%{transform:scaleY(1);opacity:1}
+  100%{transform:scaleY(1);opacity:0}
+}
+
+/* ===== セクション共通 ===== */
+section{padding:96px 0}
+.sec-head{text-align:center;margin-bottom:56px}
+.sec-head .en{
+  display:block;font-size:.72rem;letter-spacing:.34em;color:var(--toast);
+  text-transform:uppercase;margin-bottom:12px;font-family:var(--sans);
+}
+.sec-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem);letter-spacing:.16em}
+.sec-head .wheat-divider{
+  display:flex;justify-content:center;margin-top:18px;
+}
+.sec-head .wheat-divider svg{width:120px;height:20px}
+
+/* スクロールフェードイン */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.shown{opacity:1;transform:none}
+.reveal-d1{transition-delay:.08s}
+.reveal-d2{transition-delay:.16s}
+.reveal-d3{transition-delay:.24s}
+
+/* ===== パン一覧 ===== */
+#breads{
+  background:
+    linear-gradient(rgba(239,229,207,0), var(--kinari-deep) 12%, var(--kinari-deep) 88%, rgba(239,229,207,0));
+}
+.bread-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+}
+.bread-card{
+  background:var(--kinari-card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:26px 20px 24px;
+  text-align:center;
+  position:relative;
+  transition:transform .35s,box-shadow .35s;
+}
+.bread-card:hover{transform:translateY(-8px);box-shadow:0 18px 36px rgba(74,52,35,.14)}
+.bread-plate{
+  width:96px;height:96px;margin:0 auto 16px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;line-height:1;
+  background:radial-gradient(circle at 35% 30%, #fffdf6, var(--wheat-light) 78%);
+  box-shadow:inset 0 -6px 12px rgba(164,99,44,.18), 0 6px 14px rgba(74,52,35,.10);
+  transition:transform .35s;
+}
+.bread-card:hover .bread-plate{transform:rotate(-8deg) scale(1.06)}
+.bread-card h3{font-size:1.02rem;letter-spacing:.08em;margin-bottom:4px}
+.bread-card .yomi{font-size:.66rem;letter-spacing:.2em;color:var(--brown-soft);display:block;margin-bottom:10px}
+.bread-card .desc{font-size:.78rem;color:var(--brown-soft);line-height:1.8;margin-bottom:14px;min-height:4.5em}
+.bread-card .price{
+  font-family:var(--serif);font-size:1.05rem;letter-spacing:.06em;
+}
+.bread-card .price small{font-size:.68rem;color:var(--brown-soft)}
+.bread-tag{
+  position:absolute;top:14px;left:14px;
+  font-size:.62rem;letter-spacing:.14em;padding:3px 10px;border-radius:999px;
+}
+.tag-limited{background:var(--rust);color:#fff}
+.tag-popular{background:var(--wheat);color:#fff}
+.tag-weekend{background:var(--leaf);color:#fff}
+.bread-note{
+  text-align:center;font-size:.78rem;color:var(--brown-soft);margin-top:30px;
+}
+
+/* ===== 焼き上がり時間表 ===== */
+.oven-clock{
+  text-align:center;margin-bottom:34px;font-size:.85rem;color:var(--brown-soft);
+}
+.oven-clock b{
+  font-family:var(--serif);font-size:1.5rem;color:var(--brown);letter-spacing:.08em;
+  display:inline-block;min-width:5.2em;
+}
+.schedule{
+  max-width:760px;margin:0 auto;
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:var(--kinari-card);
+  box-shadow:0 14px 40px rgba(74,52,35,.08);
+}
+.slot{
+  display:grid;grid-template-columns:120px 1fr;
+  border-bottom:1px solid var(--line);
+  padding:22px 26px;gap:6px 22px;align-items:center;
+  position:relative;transition:background .4s;
+}
+.slot:last-child{border-bottom:none}
+.slot .time{
+  font-family:var(--serif);font-size:1.5rem;letter-spacing:.06em;
+  display:flex;align-items:center;gap:10px;
+}
+.slot .items{font-size:.86rem;color:var(--brown-soft);line-height:1.9}
+.slot .items b{color:var(--brown);font-weight:600}
+.slot.next-bake{
+  background:linear-gradient(90deg, rgba(178,84,44,.10), rgba(201,154,75,.08));
+}
+.slot.next-bake::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--rust);
+}
+.next-label{
+  display:none;
+  font-size:.6rem;letter-spacing:.16em;color:#fff;background:var(--rust);
+  padding:3px 10px;border-radius:999px;white-space:nowrap;
+  animation:pulseSoft 2s ease-in-out infinite;
+}
+.slot.next-bake .next-label{display:inline-block}
+.slot.done .time,.slot.done .items{opacity:.45}
+@keyframes pulseSoft{
+  0%,100%{box-shadow:0 0 0 0 rgba(178,84,44,.4)}
+  50%{box-shadow:0 0 0 7px rgba(178,84,44,0)}
+}
+.schedule-note{
+  max-width:760px;margin:22px auto 0;font-size:.76rem;color:var(--brown-soft);
+  text-align:center;
+}
+
+/* ===== 素材のこだわり ===== */
+#kodawari{
+  background:
+    linear-gradient(rgba(239,229,207,0), var(--kinari-deep) 12%, var(--kinari-deep) 88%, rgba(239,229,207,0));
+}
+.kodawari-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.kodawari-card{
+  background:var(--kinari-card);border:1px solid var(--line);border-radius:18px;
+  padding:38px 28px;position:relative;overflow:hidden;
+  transition:transform .35s,box-shadow .35s;
+}
+.kodawari-card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(74,52,35,.13)}
+.kodawari-card::after{
+  content:attr(data-num);
+  position:absolute;top:8px;right:16px;
+  font-family:var(--serif);font-size:3.6rem;color:rgba(201,154,75,.18);
+  line-height:1;
+}
+.kodawari-icon{
+  width:64px;height:64px;border-radius:16px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;font-size:1.9rem;
+  background:linear-gradient(135deg, var(--wheat-light), rgba(201,154,75,.35));
+  box-shadow:inset 0 0 0 1px rgba(164,99,44,.2);
+}
+.kodawari-card h3{font-size:1.08rem;letter-spacing:.1em;margin-bottom:14px}
+.kodawari-card p{font-size:.82rem;color:var(--brown-soft);line-height:2}
+
+/* ===== 店主のことば ===== */
+.voice{
+  max-width:680px;margin:0 auto;text-align:center;
+}
+.voice blockquote{
+  font-family:var(--serif);font-size:clamp(1.02rem,2.4vw,1.25rem);
+  letter-spacing:.1em;line-height:2.4;color:var(--brown);
+  position:relative;padding:0 20px;
+}
+.voice blockquote::before,.voice blockquote::after{
+  font-size:2.6rem;color:var(--wheat);position:absolute;line-height:1;
+}
+.voice blockquote::before{content:"“";top:-14px;left:-6px}
+.voice blockquote::after{content:"”";bottom:-24px;right:-6px}
+.voice cite{
+  display:block;margin-top:34px;font-style:normal;font-size:.8rem;
+  letter-spacing:.2em;color:var(--brown-soft);
+}
+
+/* ===== 店舗情報 ===== */
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;max-width:880px;margin:0 auto}
+.shop-info dl{display:grid;grid-template-columns:96px 1fr;gap:14px 20px;font-size:.86rem}
+.shop-info dt{
+  color:var(--toast);letter-spacing:.14em;font-size:.76rem;padding-top:3px;
+  border-top:1px solid var(--line);
+}
+.shop-info dd{color:var(--brown-soft);border-top:1px solid var(--line);padding-top:3px}
+.shop-map{
+  border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(74,52,35,.10);
+}
+.shop-map svg{display:block;width:100%;height:auto}
+
+/* ===== フッター ===== */
+footer{
+  background:var(--brown);color:var(--kinari);
+  padding:60px 0 30px;margin-top:40px;
+}
+.footer-inner{max-width:1060px;margin:0 auto;padding:0 22px;text-align:center}
+.footer-logo{font-family:var(--serif);font-size:1.5rem;letter-spacing:.24em;margin-bottom:8px}
+.footer-sub{font-size:.7rem;letter-spacing:.24em;opacity:.7;margin-bottom:28px}
+.footer-nav{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-bottom:34px}
+.footer-nav a{color:var(--kinari);text-decoration:none;font-size:.78rem;letter-spacing:.12em;opacity:.85;transition:opacity .3s}
+.footer-nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
+.copyright{font-size:.68rem;letter-spacing:.14em;opacity:.55}
+
+/* ===== レスポンシブ ===== */
+@media(max-width:900px){
+  .bread-grid{grid-template-columns:repeat(2,1fr)}
+  .kodawari-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+  .hero-inner{grid-template-columns:1fr;gap:24px}
+  .hero-art{order:-1}
+  .hero-art svg{width:min(72%,320px)}
+  .hero{padding:110px 0 90px;text-align:center}
+  .hero-copy .eyebrow{justify-content:center}
+  .hero-copy .eyebrow::before{display:none}
+  .hero-cta{justify-content:center}
+  .hero p.lead{margin-left:auto;margin-right:auto}
+  .hero-badge{width:88px;height:88px;font-size:.64rem;right:2%}
+  .hero-badge b{font-size:.9rem}
+  .shop-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  section{padding:72px 0}
+  .bread-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .bread-card{padding:22px 12px 20px}
+  .bread-plate{width:78px;height:78px;font-size:2.4rem}
+  .bread-card .desc{min-height:0}
+  .slot{grid-template-columns:1fr;padding:18px 20px}
+  .slot .time{font-size:1.3rem}
+  nav ul{
+    position:fixed;top:64px;left:0;right:0;
+    background:rgba(247,241,227,.97);
+    flex-direction:column;gap:0;
+    border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+  }
+  .menu-open nav ul{max-height:320px}
+  nav li{border-top:1px solid var(--line)}
+  nav a{display:block;padding:16px 26px;font-size:.9rem}
+  nav a::after{display:none}
+  .menu-btn{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="header-inner">
+    <a class="logo" href="#top" aria-label="麦香 トップへ">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <g fill="none" stroke="#a4632c" stroke-width="2" stroke-linecap="round">
+          <path d="M20 36V12"/>
+          <path d="M20 14c-5-1-7-4-7-9 5 0 7 3 7 9zM20 14c5-1 7-4 7-9-5 0-7 3-7 9z" fill="#c99a4b" stroke="none"/>
+          <path d="M20 21c-5-1-7-4-7-9 5 0 7 3 7 9zM20 21c5-1 7-4 7-9-5 0-7 3-7 9z" fill="#c99a4b" stroke="none" opacity=".8"/>
+          <path d="M20 28c-5-1-7-4-7-9 5 0 7 3 7 9zM20 28c5-1 7-4 7-9-5 0-7 3-7 9z" fill="#c99a4b" stroke="none" opacity=".6"/>
+        </g>
+      </svg>
+      <span class="logo-text"><b>麦香</b><span>BAKERY MUGIKA</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#breads">パン一覧</a></li>
+        <li><a href="#schedule">焼き上がり時間</a></li>
+        <li><a href="#kodawari">素材のこだわり</a></li>
+        <li><a href="#shop">店舗情報</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ヒーロー -->
+  <section class="hero" aria-label="メインビジュアル">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">SINCE 2019 — 天然酵母の小さなパン屋</span>
+        <h1>粉と水と、<br>時間だけで<span class="accent">ふくらむ</span>。</h1>
+        <p class="lead">麦香(むぎか)のパンは、自家培養のレーズン酵母でゆっくり18時間。イーストに頼らない、深い香りと素朴な甘みをお届けします。焼きたての時間に合わせて、ぜひお越しください。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#schedule">🕖 本日の焼き上がり時間</a>
+          <a class="btn btn-ghost" href="#breads">パンを見る</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-badge" aria-hidden="true"><span>毎朝</span><b>7:00</b><span>開店</span></div>
+        <svg viewBox="0 0 320 300" role="img" aria-label="湯気の立つ焼きたてのパン">
+          <g class="steam" aria-hidden="true">
+            <path d="M120 118 C112 100 128 92 120 74 C112 56 128 48 122 32"/>
+            <path d="M160 112 C152 94 168 86 160 68 C152 50 168 42 162 26"/>
+            <path d="M200 118 C192 100 208 92 200 74 C192 56 208 48 202 32"/>
+          </g>
+          <g class="bread-float">
+            <ellipse cx="160" cy="248" rx="128" ry="16" fill="rgba(74,52,35,.12)"/>
+            <path d="M42 218 C42 162 90 130 160 130 C230 130 278 162 278 218 C278 238 258 246 160 246 C62 246 42 238 42 218 Z" fill="#c9853f"/>
+            <path d="M42 218 C42 162 90 130 160 130 C230 130 278 162 278 218 C278 224 276 229 271 233 C258 208 216 148 160 148 C104 148 62 208 49 233 C44 229 42 224 42 218 Z" fill="#e0a75e"/>
+            <path d="M96 156 C110 176 112 196 100 216" stroke="#8c5222" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M160 148 C168 172 168 196 160 218" stroke="#8c5222" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M224 156 C210 176 208 196 220 216" stroke="#8c5222" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <ellipse cx="118" cy="140" rx="8" ry="4" fill="#f2d9a8" opacity=".9" transform="rotate(-18 118 140)"/>
+            <ellipse cx="205" cy="141" rx="8" ry="4" fill="#f2d9a8" opacity=".9" transform="rotate(16 205 141)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <span class="scroll-hint" aria-hidden="true">SCROLL</span>
+  </section>
+
+  <!-- パン一覧 -->
+  <section id="breads">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="en">Our Breads</span>
+        <h2>パン一覧</h2>
+        <div class="wheat-divider" aria-hidden="true">
+          <svg viewBox="0 0 120 20"><path d="M4 10 H46 M74 10 H116" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="3.4" fill="none" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="1" fill="#c99a4b"/></svg>
+        </div>
+      </div>
+
+      <div class="bread-grid">
+        <article class="bread-card reveal">
+          <span class="bread-tag tag-popular">人気No.1</span>
+          <div class="bread-plate" aria-hidden="true">🍞</div>
+          <h3>麦香食パン</h3>
+          <span class="yomi">MUGIKA SHOKUPAN</span>
+          <p class="desc">北海道産「春よ恋」を100%使用。耳までやわらかく、トーストすると蜂蜜のような甘い香りが立ちます。</p>
+          <p class="price">¥480 <small>(1斤・税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d1">
+          <div class="bread-plate" aria-hidden="true">🥖</div>
+          <h3>石窯バゲット</h3>
+          <span class="yomi">BAGUETTE</span>
+          <p class="desc">粉・水・塩・酵母のみ。バリッと薄い皮と、みずみずしいクラムのコントラストをどうぞ。</p>
+          <p class="price">¥380 <small>(税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d2">
+          <div class="bread-plate" aria-hidden="true">🥐</div>
+          <h3>発酵バターの<br>クロワッサン</h3>
+          <span class="yomi">CROISSANT</span>
+          <p class="desc">よつ葉発酵バターを27層に折り込み、低温でひと晩休ませてから焼き上げます。</p>
+          <p class="price">¥300 <small>(税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d3">
+          <span class="bread-tag tag-limited">1日20個</span>
+          <div class="bread-plate" aria-hidden="true">🫘</div>
+          <h3>あんバター</h3>
+          <span class="yomi">ANKO &amp; BUTTER</span>
+          <p class="desc">自家炊きの粒あんと有塩バターを、もっちりコッペに。冷やしてもおいしい看板商品です。</p>
+          <p class="price">¥340 <small>(税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal">
+          <div class="bread-plate" aria-hidden="true">🌾</div>
+          <h3>田舎パン<br>カンパーニュ</h3>
+          <span class="yomi">PAIN DE CAMPAGNE</span>
+          <p class="desc">全粒粉とライ麦をブレンドし、24時間の長期発酵。ほのかな酸味は天然酵母の証です。</p>
+          <p class="price">¥680 <small>(ホール・税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d1">
+          <div class="bread-plate" aria-hidden="true">🥯</div>
+          <h3>全粒粉ベーグル</h3>
+          <span class="yomi">BAGEL</span>
+          <p class="desc">茹でてから焼く昔ながらの製法。むぎゅっと詰まった生地は、噛むほどに麦の甘みが広がります。</p>
+          <p class="price">¥260 <small>(税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d2">
+          <span class="bread-tag tag-weekend">土日限定</span>
+          <div class="bread-plate" aria-hidden="true">🍇</div>
+          <h3>レーズンと<br>くるみのカンパ</h3>
+          <span class="yomi">RAISIN &amp; WALNUT</span>
+          <p class="desc">酵母のもとになったレーズンをたっぷりと。ワインやチーズと合わせたい大人の一本。</p>
+          <p class="price">¥560 <small>(税込)</small></p>
+        </article>
+
+        <article class="bread-card reveal reveal-d3">
+          <div class="bread-plate" aria-hidden="true">🧈</div>
+          <h3>塩バターロール</h3>
+          <span class="yomi">SHIO BUTTER ROLL</span>
+          <p class="desc">底面はカリッと、中からじゅわっとバター。焼き上がり直後が食べごろの小さな贅沢。</p>
+          <p class="price">¥200 <small>(税込)</small></p>
+        </article>
+      </div>
+
+      <p class="bread-note reveal">※ 数に限りがございます。売り切れの際はご容赦ください。お取り置きはお電話にて承ります。</p>
+    </div>
+  </section>
+
+  <!-- 焼き上がり時間表 -->
+  <section id="schedule">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="en">Baking Schedule</span>
+        <h2>焼き上がり時間表</h2>
+        <div class="wheat-divider" aria-hidden="true">
+          <svg viewBox="0 0 120 20"><path d="M4 10 H46 M74 10 H116" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="3.4" fill="none" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="1" fill="#c99a4b"/></svg>
+        </div>
+      </div>
+
+      <p class="oven-clock reveal">ただいまの時刻 <b id="clockNow">--:--:--</b></p>
+
+      <div class="schedule reveal" id="scheduleList">
+        <div class="slot" data-hour="7">
+          <div class="time">7:00 <span class="next-label">次の焼き上がり</span></div>
+          <div class="items"><b>麦香食パン</b>・塩バターロール・全粒粉ベーグル</div>
+        </div>
+        <div class="slot" data-hour="9">
+          <div class="time">9:00 <span class="next-label">次の焼き上がり</span></div>
+          <div class="items"><b>発酵バターのクロワッサン</b>・石窯バゲット(1回目)</div>
+        </div>
+        <div class="slot" data-hour="11">
+          <div class="time">11:00 <span class="next-label">次の焼き上がり</span></div>
+          <div class="items"><b>カンパーニュ</b>・あんバター・レーズンとくるみのカンパ(土日)</div>
+        </div>
+        <div class="slot" data-hour="14">
+          <div class="time">14:00 <span class="next-label">次の焼き上がり</span></div>
+          <div class="items"><b>麦香食パン(2回目)</b>・石窯バゲット(2回目)</div>
+        </div>
+        <div class="slot" data-hour="16">
+          <div class="time">16:00 <span class="next-label">次の焼き上がり</span></div>
+          <div class="items"><b>塩バターロール(2回目)</b>・おやつパン各種</div>
+        </div>
+      </div>
+
+      <p class="schedule-note reveal">生地の状態により、焼き上がりが前後することがあります。確実にお求めの際はお電話ください。<br>営業時間 7:00–18:00(売り切れ次第閉店)/ 定休日 月曜・第2火曜</p>
+    </div>
+  </section>
+
+  <!-- 素材のこだわり -->
+  <section id="kodawari">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="en">Our Ingredients</span>
+        <h2>素材のこだわり</h2>
+        <div class="wheat-divider" aria-hidden="true">
+          <svg viewBox="0 0 120 20"><path d="M4 10 H46 M74 10 H116" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="3.4" fill="none" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="1" fill="#c99a4b"/></svg>
+        </div>
+      </div>
+
+      <div class="kodawari-grid">
+        <article class="kodawari-card reveal" data-num="01">
+          <div class="kodawari-icon" aria-hidden="true">🍇</div>
+          <h3>自家培養のレーズン酵母</h3>
+          <p>開店以来つぎ足しながら育てている酵母は、有機レーズンから起こしたもの。気温や湿度と相談しながら、毎日状態を見きわめて仕込みます。ゆっくり発酵させた生地は、消化にもやさしいと言われています。</p>
+        </article>
+        <article class="kodawari-card reveal reveal-d1" data-num="02">
+          <div class="kodawari-icon" aria-hidden="true">🌾</div>
+          <h3>顔の見える国産小麦</h3>
+          <p>主力の「春よ恋」は北海道・十勝の契約農家から直接仕入れ。全粒粉は店内の石臼で使う分だけ挽くので、粉の香りが違います。ライ麦は長野県産を使用しています。</p>
+        </article>
+        <article class="kodawari-card reveal reveal-d2" data-num="03">
+          <div class="kodawari-icon" aria-hidden="true">🧂</div>
+          <h3>水と塩、それから引き算</h3>
+          <p>仕込み水は硬度を調整した浄水、塩は瀬戸内の平釜炊き。マーガリン・ショートニング・乳化剤・保存料は使いません。足すのではなく、引き算でパンの味をつくります。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 店主のことば -->
+  <section id="voice" aria-label="店主のことば">
+    <div class="wrap">
+      <div class="voice reveal">
+        <blockquote>酵母は生きものなので、毎日同じパンは焼けません。<br>それでも「今日もおいしいね」と言ってもらえるように、<br>今日の生地と、まじめに向き合っています。</blockquote>
+        <cite>— 店主・小暮 麦人(こぐれ むぎと)</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- 店舗情報 -->
+  <section id="shop">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="en">Shop Info</span>
+        <h2>店舗情報</h2>
+        <div class="wheat-divider" aria-hidden="true">
+          <svg viewBox="0 0 120 20"><path d="M4 10 H46 M74 10 H116" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="3.4" fill="none" stroke="#c99a4b" stroke-width="1"/><circle cx="60" cy="10" r="1" fill="#c99a4b"/></svg>
+        </div>
+      </div>
+
+      <div class="shop-grid">
+        <div class="shop-info reveal">
+          <dl>
+            <dt>店名</dt><dd>天然酵母ベーカリー 麦香(むぎか)</dd>
+            <dt>住所</dt><dd>〒185-0021 東京都国分寺市南町2-14-6 ことのは荘 1F</dd>
+            <dt>アクセス</dt><dd>JR中央線「国分寺駅」南口より徒歩6分</dd>
+            <dt>営業時間</dt><dd>7:00 – 18:00(売り切れ次第閉店)</dd>
+            <dt>定休日</dt><dd>月曜・第2火曜</dd>
+            <dt>電話</dt><dd>042-000-0000(お取り置き承ります)</dd>
+            <dt>支払い</dt><dd>現金・各種キャッシュレス対応</dd>
+          </dl>
+        </div>
+        <div class="shop-map reveal reveal-d1" aria-label="店舗周辺の略地図">
+          <svg viewBox="0 0 400 300" role="img" aria-label="国分寺駅南口から麦香までの略地図">
+            <rect width="400" height="300" fill="#efe5cf"/>
+            <path d="M0 90 H400" stroke="#d8c9a6" stroke-width="26"/>
+            <path d="M120 0 V300" stroke="#d8c9a6" stroke-width="18"/>
+            <path d="M120 200 H400" stroke="#d8c9a6" stroke-width="14"/>
+            <path d="M0 90 H400" stroke="#fbf7ec" stroke-width="2" stroke-dasharray="10 8"/>
+            <rect x="24" y="52" rx="6" width="120" height="30" fill="#4a3423"/>
+            <text x="84" y="72" text-anchor="middle" font-size="13" fill="#f7f1e3" font-family="sans-serif">JR 国分寺駅</text>
+            <circle cx="150" cy="200" r="6" fill="#7a7d4a"/>
+            <text x="150" y="226" text-anchor="middle" font-size="11" fill="#6e523a" font-family="sans-serif">南町二丁目</text>
+            <path d="M120 90 V200 H262" stroke="#b2542c" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+            <g transform="translate(262 200)">
+              <circle r="17" fill="#b2542c"/>
+              <text y="6" text-anchor="middle" font-size="15">🍞</text>
+            </g>
+            <text x="262" y="245" text-anchor="middle" font-size="13" fill="#4a3423" font-weight="bold" font-family="sans-serif">麦香</text>
+            <text x="262" y="262" text-anchor="middle" font-size="10" fill="#6e523a" font-family="sans-serif">駅から徒歩6分</text>
+            <g transform="translate(360 34)" fill="#6e523a" font-family="sans-serif">
+              <path d="M0 14 V-8 M0 -8 L-5 0 M0 -8 L5 0" stroke="#6e523a" stroke-width="2" fill="none"/>
+              <text y="30" text-anchor="middle" font-size="10">N</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-logo">麦 香</p>
+    <p class="footer-sub">NATURAL YEAST BAKERY MUGIKA</p>
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <a href="#breads">パン一覧</a>
+      <a href="#schedule">焼き上がり時間</a>
+      <a href="#kodawari">素材のこだわり</a>
+      <a href="#shop">店舗情報</a>
+    </nav>
+    <p class="copyright">© 2026 masafykun</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ヘッダー: スクロールで影をつける */
+  var header = document.getElementById("siteHeader");
+  function onScroll(){
+    if(window.scrollY > 10){ header.classList.add("scrolled"); }
+    else{ header.classList.remove("scrolled"); }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* モバイルメニュー */
+  var menuBtn = document.getElementById("menuBtn");
+  var navList = document.getElementById("navList");
+  menuBtn.addEventListener("click", function(){
+    var open = document.body.classList.toggle("menu-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+  });
+  navList.addEventListener("click", function(e){
+    if(e.target.tagName === "A"){
+      document.body.classList.remove("menu-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  /* スクロールフェードイン */
+  var revealEls = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("shown");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }else{
+    revealEls.forEach(function(el){ el.classList.add("shown"); });
+  }
+
+  /* 現在時刻の表示と、次の焼き上がりのハイライト */
+  var clockEl = document.getElementById("clockNow");
+  var slots = document.querySelectorAll("#scheduleList .slot");
+
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+
+  function updateSchedule(){
+    var now = new Date();
+    clockEl.textContent = pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+    var nextFound = false;
+    slots.forEach(function(slot){
+      var bakeMin = parseInt(slot.getAttribute("data-hour"), 10) * 60;
+      slot.classList.remove("next-bake", "done");
+      if(bakeMin <= nowMin){
+        slot.classList.add("done");
+      }else if(!nextFound){
+        slot.classList.add("next-bake");
+        nextFound = true;
+      }
+    });
+    /* 最終の焼き上がりを過ぎていたら、翌朝の最初の回を案内する */
+    if(!nextFound && slots.length > 0){
+      slots[0].classList.remove("done");
+      slots[0].classList.add("next-bake");
+    }
+  }
+  updateSchedule();
+  setInterval(updateSchedule, 1000);
+})();
+</script>
+</body>
+</html>
